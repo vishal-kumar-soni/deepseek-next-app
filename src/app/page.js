@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { assets } from "../../public/assets/assets";
+import Sidebar from "@/components/Sidebar";
 
 
 export default function Home() {
@@ -16,10 +17,13 @@ export default function Home() {
       <div className="flex h-screen">
 
         {/* Sidebar */}
+        <Sidebar expand={expand} setExpand={setExpand}/>
+
+
         <div className="flex flex-1 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#292a2b]">
           <div className="w-full md:hidden absolute px-4 top-6 flex items-center justify-between ">
-            <Image onClick={() => (expand ? setExpand(false) : setExpand(true))} className="rotate-180 " src={assets.menu_icon} />
-            <Image className="opacity-70 " src={assets.chat_icon} />
+            <Image alt="" onClick={() => (expand ? setExpand(false) : setExpand(true))} className="rotate-180 " src={assets.menu_icon} />
+            <Image  alt=""  className="opacity-70 " src={assets.chat_icon} />
           </div>
           {
             (messages.length === 0) ? (
