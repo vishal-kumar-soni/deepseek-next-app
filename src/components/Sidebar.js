@@ -3,8 +3,12 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { assets } from '../../public/assets/assets'
 import { EllipsisVertical, Smartphone, Settings, CircleQuestionMark, LogOut } from 'lucide-react';
+import { UserButton, useClerk } from '@clerk/nextjs';
+import { useAppContext } from '@/context/AppContext';
+import Chatlabel from './Chatlabel';
 
 const footerdata = [
+
     {
         title: "Download mobile App",
         icon: <Smartphone width={20} h={20} />
@@ -23,9 +27,15 @@ const footerdata = [
     },
 ]
 
+
+
 function Sidebar({ expand, setExpand }) {
 
+    const { user } = useAppContext()
+    const { openSignIn } = useClerk()
     const [menuExpand, setMenuExpand] = useState(false)
+    const [openMenu, setOpenMenu] = useState({id:0, open:false})
+
 
     return (
         <div className={`flex flex-col justify-between bg-[#212327] pt-7 transition-all z-0 max-md:absolute max-md:h-screen ${expand ? 'p-4 w-72' : 'md:w-20 w-0 max-md:overflow-hidden '}`}>
@@ -57,7 +67,9 @@ function Sidebar({ expand, setExpand }) {
                 </button>
                 <div className={`mt-8 text-white/25 text-sm ${expand ? 'bloack' : "hidden"}`}>
                     <p className='my-1'>Recents</p>
+
                     {/* Chatlabel */}
+                    <Chatlabel openMenu={openMenu} setOpenMenu={setOpenMenu}/>
                 </div>
             </div>
 
@@ -75,7 +87,11 @@ function Sidebar({ expand, setExpand }) {
             {/* Footer */}
             <div className={`rounded-lg p-2 gap-2 ${expand ? 'flex justify-between hover:bg-gray-700 ' : 'flex justify-center  cursor-pointer '}   `}>
                 <div className='flex gap-2'>
-                    <Image src={assets.profile_picture} alt='' className={'h-7 w-7 rounded-full'} />
+                    {
+                        user ?
+                            <UserButton /> :
+                            <Image onClick={user ? null : openSignIn} src={assets.profile_picture} alt='' className={'h-7 w-7 rounded-full cursor-pointer'} />
+                    }
                     <div className={expand ? 'w-52 overflow-hidden ' : 'w-0'}>
                         <p className={expand ? 'text-white/60 text-sm  mt-1' : ' hidden'}>vishal@gmail.com</p>
                     </div>
