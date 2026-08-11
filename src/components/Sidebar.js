@@ -1,11 +1,12 @@
 'use client'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { assets } from '../../public/assets/assets'
 import { EllipsisVertical, Smartphone, Settings, CircleQuestionMark, LogOut } from 'lucide-react';
 import { UserButton, useClerk } from '@clerk/nextjs';
 import { useAppContext } from '@/context/AppContext';
 import Chatlabel from './Chatlabel';
+
 
 const footerdata = [
 
@@ -34,7 +35,27 @@ function Sidebar({ expand, setExpand }) {
     const { user } = useAppContext()
     const { openSignIn } = useClerk()
     const [menuExpand, setMenuExpand] = useState(false)
-    const [openMenu, setOpenMenu] = useState({id:0, open:false})
+    const [openMenu, setOpenMenu] = useState({ id: 0, open: false })
+    const menuRef = useRef()
+
+    useEffect(() => {
+
+        function handleClickOutside(event) {
+            if (
+                menuRef.current &&
+                !menuRef.current.contains(event.target)
+            ) {
+                setMenuExpand( false )
+            }
+
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [setMenuExpand])
 
 
     return (
@@ -43,7 +64,7 @@ function Sidebar({ expand, setExpand }) {
                 <div className={` flex ${expand ? 'flex-row gap-8' : 'flex-col items-center gap-8'}`}>
                     <Image src={expand ? assets.logo_text : assets.logo_icon} alt='' className={` ${expand ? 'w-56' : " w-10"} `} />
                     <div onClick={() => expand ? setExpand(false) : setExpand(true)} className={` group relative flex items-center justify-center hover:bg-gray-500/20 transition-all duration-300 w-9 h-9  aspect-square rounded-lg cursor-pointer `}>
-                        <Image src={assets.menu_icon} alt='' className="md:hidden" />
+                        <Image  src={assets.menu_icon} alt='' className="md:hidden" />
                         <Image src={expand ? assets.sidebar_close_icon : assets.sidebar_icon} alt='' className="hidden md:block w-8" />
 
                         <div className={`w-max absolute ${expand ? 'left-1/2 -translate-x-1/2 top-12' : ' -top-12 left-0'} opacity-0 group-hover:opacity-100 transition bg-black text-white text-xs px-3 py-2 rounded-lg  shadow-lg pointer-events-none `}>
@@ -69,7 +90,7 @@ function Sidebar({ expand, setExpand }) {
                     <p className='my-1'>Recents</p>
 
                     {/* Chatlabel */}
-                    <Chatlabel openMenu={openMenu} setOpenMenu={setOpenMenu}/>
+                    <Chatlabel openMenu={openMenu} setOpenMenu={setOpenMenu} />
                 </div>
             </div>
 
@@ -97,7 +118,7 @@ function Sidebar({ expand, setExpand }) {
                     </div>
                 </div>
 
-                <EllipsisVertical onClick={() => menuExpand ? setMenuExpand(false) : setMenuExpand(true)} className={`cursor-pointer ${expand ? 'text-white/60' : 'hidden'} `} />
+                <EllipsisVertical ref={menuRef} onClick={() => menuExpand ? setMenuExpand(false) : setMenuExpand(true)} className={`cursor-pointer ${expand ? 'text-white/60' : 'hidden'} `} />
             </div>
         </div>
     )

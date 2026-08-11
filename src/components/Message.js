@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { assets } from '../../public/assets/assets'
 
+
 function Message({ role, content }) {
     return (
         <div className='flex flex-col items-center w-full max-w-3xl text-sm '>
