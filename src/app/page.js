@@ -5,6 +5,7 @@ import { useState } from "react";
 import { assets } from "../../public/assets/assets";
 import Sidebar from "@/components/Sidebar";
 import PromptBox from "@/components/PromptBox";
+import Message from "@/components/Message";
 
 
 export default function Home() {
@@ -27,7 +28,7 @@ export default function Home() {
             <Image  alt=""  className="opacity-70 " src={assets.chat_icon} />
           </div>
           {
-            (messages.length === 0) ? (
+            (messages.length !== 0) ? (
               <>
                 <div className="flex items-center gap-3 bg-amber-20">
                   <Image src={assets.logo_icon} width={40} height={40} className="" alt="Logo" />
@@ -36,7 +37,9 @@ export default function Home() {
                 <p className='text-sm mt-2'>How can I help you Today</p>
               </>
             ) : (
-              <div></div>
+              <div>
+                <Message role='AI' content='What is next.js and tailwind css'/>
+              </div>
             )
           }
 
