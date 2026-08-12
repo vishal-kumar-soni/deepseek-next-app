@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { assets } from '../../public/assets/assets'
 import { EllipsisVertical, Smartphone, Settings, CircleQuestionMark, LogOut } from 'lucide-react';
 import { UserButton, useClerk } from '@clerk/nextjs';
-import { useAppContext } from '@/context/AppContext';
-import Chatlabel from './Chatlabel';
+import { useAppContext } from '@/context/AppContext.js';
+import Chatlabel from './Chatlabel.js';
 
 
 const footerdata = [

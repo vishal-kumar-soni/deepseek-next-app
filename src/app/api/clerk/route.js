@@ -46,6 +46,5 @@ export async function POST(req, content) {
             break;
     }
 
-    return NextResponse.json({success:true, message : 'Message received'})
-
+    return NextResponse.json({success:true, message : 'Message received'}, {status:200})
 }
