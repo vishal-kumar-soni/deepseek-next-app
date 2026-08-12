@@ -18,6 +18,6 @@ const ChatSchema = new mongoose.Schema({
         required: true
     },
 
-}, { timestamps: true })
+}, {timestamps:true })
 
 export default ChatModel = mongoose.models.ChatModel || mongoose.model('Chat', ChatSchema)

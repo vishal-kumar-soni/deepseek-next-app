@@ -1,5 +1,5 @@
-import connectionDB from "@/config/db.config";
-import UserModel from "@/models/User.model";
+import connectionDB from "@/config/db.config.js";
+import UserModel from "@/models/User.model.js";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
@@ -7,7 +7,7 @@ import { Webhook } from "svix";
 
 
 export default async function POST(req, content) {
-    
+
     const wh = new Webhook(process.env.SIGNIN_SECRET)
     const headerpayload = await headers()
     const svixHeaders = {
