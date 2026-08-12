@@ -6,7 +6,7 @@ import { Webhook } from "svix";
 
 
 
-export default async function POST(req, content) {
+export async function POST(req, content) {
 
     const wh = new Webhook(process.env.SIGNIN_SECRET)
     const headerpayload = await headers()
@@ -31,7 +31,7 @@ export default async function POST(req, content) {
 
     await connectionDB()
 
-    switch (value) {
+    switch (type) {
         case 'user.created':
             await UserModel.create(userData)
             break;
