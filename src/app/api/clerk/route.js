@@ -34,19 +34,44 @@ export async function POST(req, content) {
     await connectionDB()
 
     switch (type) {
-        case 'user.created':
-            await UserModel.create(userData)
-            break;
-        case 'user.updated':
-            await UserModel.findByIdAndUpdate(data.id , userData)
-            break;
-        case 'user.deleted':
-            await UserModel.findByIdAndDelete(data.id)
-            break;
 
-        default:
+        case "user.created": {
+
+            const userData = {
+                _id: data.id,
+                email: data.email_addresses[0].email_address,
+                name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+                image: data.image_url,
+            };
+
+            await UserModel.create(userData);
+
             break;
+        }
+
+        case "user.updated": {
+
+            const userData = {
+                email: data.email_addresses[0].email_address,
+                name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+                image: data.image_url,
+            };
+
+            await UserModel.findByIdAndUpdate(
+                data.id,
+                userData
+            );
+
+            break;
+        }
+
+        case "user.deleted": {
+
+            await UserModel.findByIdAndDelete(data.id);
+
+            break;
+        }
     }
 
-    return NextResponse.json({success:true, message : 'Message received'}, {status:200})
+    return NextResponse.json({ success: true, message: 'Message received' }, { status: 200 })
 }
