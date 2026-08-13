@@ -4,9 +4,10 @@ import { getAuth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 
-export async function POST(req) {
+export async function GET(req) {
     try {
         const { userId } = getAuth(req);
+        const { chatId } = await req.json()
 
         if (!userId) {
             return NextResponse.json({
@@ -15,15 +16,13 @@ export async function POST(req) {
             })
         }
 
-        const {chatId , name } = await req.json();
-
-        //Connect the database and rename the Chat
+        //Connect the database and delete the Chat
         await connectionDB()
-        await ChatModel.findOneAndUpdate({_id:chatId,userId}, {name});
+        await ChatModel.findOneAndDelete({ _id: chatId, userId });
 
         return NextResponse.json({
             success: true,
-            message: 'Chat is Renamed',
+            message: 'Chat is Deleted',
         })
 
     } catch (error) {
