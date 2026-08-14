@@ -1,4 +1,4 @@
-export const maxDuration = 60;
+export const maxDuration = 60; // Gives this route a maximum execution duration of 60 seconds.
 import connectionDB from "@/config/db.config";
 import ChatModel from "@/models/Chat.model";
 import { getAuth } from "@clerk/nextjs/server";
@@ -27,7 +27,7 @@ export async function POST(req) {
 
         // Find the chat document in the database based on chatId and userId
         await connectionDB()
-        const data = await ChatModel.find({ userId, _id: chatId })
+        const chatData = await ChatModel.findOne({ userId, _id: chatId }) // issue
 
         // Create a user message object
         const userPrompt = {
@@ -36,7 +36,7 @@ export async function POST(req) {
             timestamp: Date.now()
         }
 
-        data.message.push(userPrompt)
+        chatData.messages.push(userPrompt)
 
         // Call the deepseek API to get a chat complition
         const completion = await openai.chat.completions.create({
@@ -49,14 +49,15 @@ export async function POST(req) {
         });
 
         const message = completion.choices[0].message.content;
-        message.timestamp = date.now()
-        data.messages.push(message)
-        data.save()
+        message.timestamp = Date.now()
+
+        chatData.messages.push(message)
+        await chatData.save()
 
 
         return NextResponse.json({
             success: true,
-            data,
+            data:chatData,
         })
 
     } catch (error) {

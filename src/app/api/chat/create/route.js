@@ -18,7 +18,7 @@ export async function POST(req) {
         // Prepare the chat data to be saved in the database 
         let chatdata = {
             userId,
-            message: [],
+            messages: [],
             name: 'New Chat',
         }
 
