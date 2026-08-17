@@ -48,7 +48,7 @@ export async function POST(req) {
             stream: false,
         });
 
-        const message = completion.choices[0].message.content;
+        const message = completion.choices[0].message.content; //issue
         message.timestamp = Date.now()
 
         chatData.messages.push(message)
@@ -57,7 +57,7 @@ export async function POST(req) {
 
         return NextResponse.json({
             success: true,
-            data:chatData,
+            data:message,
         })
 
     } catch (error) {
@@ -69,3 +69,4 @@ export async function POST(req) {
 
     }
 }
+ 

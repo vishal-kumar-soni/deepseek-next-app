@@ -51,20 +51,20 @@ export const AppContextProvider = ({ children }) => {
 
             if (data.success) {
                 console.log(data.data)
-                setChats(data.data)
+                setChats(data.data) 
 
                 //If user has no chat , create one
                 if (data.data.length == 0) {
                     await createNewChat();
                     return fetchUsersChat()
                 } else {
+                    //sort chats by updated date
                     data.data.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
                 }
 
                 // set recently updated chat as selectedChat
                 setSelectedChat(data.data[0])
                 console.log(data.data[0])
-
 
             } else {
                 alert(data.message)
