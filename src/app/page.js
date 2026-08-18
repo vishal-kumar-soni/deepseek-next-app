@@ -21,7 +21,6 @@ export default function Home() {
         {/* Sidebar */}
         <Sidebar expand={expand} setExpand={setExpand}/>
 
-
         <div className="flex flex-1 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#292a2b]">
           <div className="w-full md:hidden absolute px-4 top-6 flex items-center justify-between ">
             <Image alt="" onClick={() => (expand ? setExpand(false) : setExpand(true))} className="rotate-180 " src={assets.menu_icon} />

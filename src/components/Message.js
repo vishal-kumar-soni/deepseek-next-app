@@ -13,15 +13,15 @@ function Message({ role, content }) {
                             {
                                 (role == 'user') ? (
                                     <>
-                                        <Image src={assets.copy_icon} alt='' className='w-4 cursor-pointer' />
-                                        <Image src={assets.pencil_icon} alt='' className='w-4.5 cursor-pointer' />
+                                        <Image src={assets.copy_icon} alt='' className='w-4 h-auto cursor-pointer' />
+                                        <Image src={assets.pencil_icon} alt='' className='w-4.5 h-auto cursor-pointer' />
                                     </>
                                 ) : (
                                     <>
-                                        <Image src={assets.copy_icon} alt='' className='w-4.5 cursor-pointer' />
-                                        <Image src={assets.regenerate_icon} alt='' className='w-4 cursor-pointer' />
-                                        <Image src={assets.like_icon} alt='' className='w-4 cursor-pointer' />
-                                        <Image src={assets.dislike_icon} alt='' className='w-4 cursor-pointer' />
+                                        <Image src={assets.copy_icon} alt='' className='w-4.5 h-auto cursor-pointer' />
+                                        <Image src={assets.regenerate_icon} alt='' className='w-4  h-autocursor-pointer' />
+                                        <Image src={assets.like_icon} alt='' className='w-4 h-auto cursor-pointer' />
+                                        <Image src={assets.dislike_icon} alt='' className='w-4 h-auto cursor-pointer' />
                                     </>
                                 )
                             }

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { assets } from '../../public/assets/assets'
@@ -14,12 +16,13 @@ function PromptBox({ isLoading, setIsLoading }) {
     if (e.key == "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendPrompt(e)
-    }
+    } 
   }
 
   const sendPrompt = async (e) => {
 
     const promptCopy = prompt;
+    console.log("The prompt copy is ",promptCopy)
 
     try {
 
