@@ -102,7 +102,7 @@ function PromptBox({ isLoading, setIsLoading }) {
               return { ...prev, messages: updateMessages }
             })
 
-          })
+          }) 
         }
 
       } else {
