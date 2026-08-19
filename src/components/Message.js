@@ -3,18 +3,20 @@
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { assets } from '../../public/assets/assets'
-import Markdown from 'react-markdown' 
-import Prism from 'prismjs' 
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import Prism from 'prismjs'
 
 
 
 function Message({ role, content }) {
 
-    useEffect(()=>{
-       Prism.highlightAll()
-    },[content])
+    useEffect(() => {
+        Prism.highlightAll()
+    }, [content])
 
-    const copyText =()=>{
+    const copyText = () => {
         navigator.clipboard.writeText(content);
         alert('message copied')
     }
@@ -49,8 +51,13 @@ function Message({ role, content }) {
                             <>
                                 <Image src={assets.logo_icon} alt='' className='h-9 w-9 p-1 border border-white/15 rounded-full ' />
                                 <div className='space-y-4 w-full overflow-scroll'>
-                                    <Markdown>{content}</Markdown>
-                                    
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkGfm]}
+                                        rehypePlugins={[rehypeRaw]}
+                                    >
+                                        {content}
+                                    </ReactMarkdown>
+
                                 </div>
                             </>
                         )

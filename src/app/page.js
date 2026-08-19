@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { assets } from "../../public/assets/assets";
 import Sidebar from "@/components/Sidebar.js";
 import PromptBox from "@/components/PromptBox.js";
@@ -15,11 +15,21 @@ export default function Home() {
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { selectedChat } = useAppContext()
+  const containerRef = useRef()
 
   
   useEffect(() => {
     if (selectedChat) {
       setMessages(selectedChat.messages)
+    }
+  }, [selectedChat])
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavius:'smooth',
+      })
     }
   }, [selectedChat])
   
@@ -46,7 +56,7 @@ export default function Home() {
                 <p className='text-sm mt-2'>How can I help you Today</p>
               </>
             ) : (
-              <div className="relative flex flex-col justify-start items-center mt-20 w-full max-h-screen  overflow-y-auto">
+              <div ref={containerRef} className="relative flex flex-col justify-start items-center mt-20 w-full max-h-screen  overflow-y-auto">
                 <p className="fixed top-8 border border-transparent hover:border-gray-500/50 py-1 px-2 rounded-lg font-semibold mb-6">{selectedChat.name}</p>
                 {
                   messages.map((msg, idx)=>(
