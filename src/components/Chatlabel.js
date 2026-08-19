@@ -4,6 +4,8 @@ import Image from "next/image";
 import React from "react";
 import { assets } from "../../public/assets/assets";
 import { useAppContext } from "@/context/AppContext";
+import axios from "axios";
+
 
 function Chatlabel({ openMenu, setOpenMenu, name, id }) {
     const { fetchUsersChat, chats, setSelectedChat } = useAppContext();
@@ -15,7 +17,6 @@ function Chatlabel({ openMenu, setOpenMenu, name, id }) {
     };
 
     const renameChat = async () => {
-        console.log('rename is clicked')
         try {
             const newName = prompt("Enter the new name");
             if (!newName) return;
@@ -70,12 +71,12 @@ function Chatlabel({ openMenu, setOpenMenu, name, id }) {
             <div
                 className={`absolute ${openMenu.id == id &&  openMenu.open ? "block" : "hidden"} -right-5 top-6 bg-gray-700 rounded-xl w-max p-2 `}
             >
-                <div className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg">
-                    <Image onClick={renameChat} src={assets.pencil_icon} alt="" />
+                <div onClick={renameChat}  className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg">
+                    <Image src={assets.pencil_icon} alt="" />
                     <p>Rename</p>
                 </div>
-                <div className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg">
-                    <Image onClick={deleteChat} src={assets.delete_icon} alt="" />
+                <div  className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg">
+                    <Image src={assets.delete_icon} alt="" />
                     <p>Delete</p>
                 </div>
             </div>
