@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { assets } from '../../public/assets/assets'
@@ -10,7 +12,12 @@ function Message({ role, content }) {
 
     useEffect(()=>{
        Prism.highlightAll()
-    },{content})
+    },[content])
+
+    const copyText =()=>{
+        navigator.clipboard.writeText(content);
+        alert('message copied')
+    }
 
     return (
         <div className='flex flex-col items-center w-full max-w-3xl text-sm '>
@@ -21,12 +28,12 @@ function Message({ role, content }) {
                             {
                                 (role == 'user') ? (
                                     <>
-                                        <Image src={assets.copy_icon} alt='' className='w-4 h-auto cursor-pointer' />
+                                        <Image onClick={copyText} src={assets.copy_icon} alt='' className='w-4 h-auto cursor-pointer' />
                                         <Image src={assets.pencil_icon} alt='' className='w-4.5 h-auto cursor-pointer' />
                                     </>
                                 ) : (
                                     <>
-                                        <Image src={assets.copy_icon} alt='' className='w-4.5 h-auto cursor-pointer' />
+                                        <Image onClick={copyText} src={assets.copy_icon} alt='' className='w-4.5 h-auto cursor-pointer' />
                                         <Image src={assets.regenerate_icon} alt='' className='w-4  h-autocursor-pointer' />
                                         <Image src={assets.like_icon} alt='' className='w-4 h-auto cursor-pointer' />
                                         <Image src={assets.dislike_icon} alt='' className='w-4 h-auto cursor-pointer' />

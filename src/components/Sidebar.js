@@ -31,7 +31,7 @@ const footerdata = [
 
 function Sidebar({ expand, setExpand }) {
 
-    const { user } = useAppContext()
+    const { user, chats, createNewChat } = useAppContext()
     const { openSignIn } = useClerk()
     const [menuExpand, setMenuExpand] = useState(false)
     const [openMenu, setOpenMenu] = useState({ id: 0, open: false })
@@ -74,7 +74,7 @@ function Sidebar({ expand, setExpand }) {
                     </div>
                 </div>
 
-                <button className={`flex items-center justify-center mt-5 cursor-pointer ${expand ? 'bg-primary hover:opacity-90 rounded-2xl p-2.5 gap-2 w-max  ' : ' group relative h-9 w-9 mx-auto hover:bg-gray-500/30 rounded-lg '}`}>
+                <button onClick={createNewChat} className={`flex items-center justify-center mt-5 cursor-pointer ${expand ? 'bg-primary hover:opacity-90 rounded-2xl p-2.5 gap-2 w-max  ' : ' group relative h-9 w-9 mx-auto hover:bg-gray-500/30 rounded-lg '}`}>
                     <Image src={expand ? assets.chat_icon : assets.chat_icon_dull} alt='' className={expand ? 'w-6 h-auto' : 'w-7 h-auto'} />
                     <div className='absolute w-max -top-12 -right-12 opacity-0 group-hover:opacity-100 transition bg-black text-white text-sm px-3 py-2 rounded-lg shadow-lg pointer-events-none '>
                         New Chat
@@ -89,7 +89,11 @@ function Sidebar({ expand, setExpand }) {
                     <p className='my-1'>Recents</p>
 
                     {/* Chatlabel */}
-                    <Chatlabel openMenu={openMenu} setOpenMenu={setOpenMenu} />
+                    {
+                        chats.map((chat, idx)=>
+                            <Chatlabel key={idx} name={chat.name} id={chat._id} openMenu={openMenu} setOpenMenu={setOpenMenu} />
+                        )
+                    }
                 </div>
             </div>
 
