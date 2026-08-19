@@ -15,6 +15,7 @@ export default function Home() {
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { selectedChat } = useAppContext()
+
   
   useEffect(() => {
     if (selectedChat) {
@@ -53,7 +54,7 @@ export default function Home() {
                   ))
                 }
                 {
-                  isLoading? (
+                  isLoading && (
                     <div className="flex gap-4 max-w-3xl w-full py-3">
                       <Image className="h-9 w-9 p-1 border border-white/15 rounded-full " src={assets.logo_icon} alt=""/>
                       <div className="loader flex justify-center items-center gap-1">
@@ -62,7 +63,7 @@ export default function Home() {
                         <div className="w-1 h-1 rounded-full bg-white animate-bounce "></div>
                       </div>
                     </div>
-                  ):(<></>)
+                  )
                 }
               </div>
             )
