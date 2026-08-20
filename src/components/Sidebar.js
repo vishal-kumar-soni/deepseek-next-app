@@ -46,7 +46,7 @@ function Sidebar({ expand, setExpand }) {
         window.location.reload();
         alert('User signed out')
     }
-
+console.log("user", user)
 
     return (
         <div className={`flex flex-col justify-between  border-r border-r-white/5 bg-[rgba(23,24,26,0.96)]  transition-all z-0 max-md:absolute max-md:h-screen ${expand ? 'px-3 py-4 w-66' : 'md:w-52 md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden '}`}>
@@ -116,7 +116,7 @@ function Sidebar({ expand, setExpand }) {
                             <Image onClick={user ? null : openSignIn} src={assets.profile_picture} alt='' className={'h-7 w-7 rounded-full cursor-pointer'} />
                     }
                     <div className={expand ? 'w-32 overflow-hidden ' : 'w-0'}>
-                        <p className={expand ? 'text-white/60 text-sm  mt-1' : ' hidden'}>vishal@gmail.com</p>
+                        <p className={expand ? 'text-white/90 text-sm  mt-1' : ' hidden'}>{user?user?.fullName : 'Your name'}</p>
                     </div>
                 </div>
 

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { assets } from "../../public/assets/assets";
-import { Zap, Forward } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import Sidebar from "@/components/Sidebar.js";
 import PromptBox from "@/components/PromptBox.js";
 import Message from "@/components/Message.js";
@@ -65,7 +65,7 @@ export default function Home() {
                   <p className="text-[12px] text-white/70">Instant</p>
                 </div>
                 <div className="fixed top-3 right-8 text-white/70 p-1.5 hover:bg-white/5 rounded-full cursor-pointer" title="Share">
-                 <ShareIcon/>
+                  <ShareIcon />
                 </div>
                 {
                   messages.map((msg, idx) => (
