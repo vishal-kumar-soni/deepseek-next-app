@@ -36,7 +36,7 @@ function Message({ role, content }) {
                                     </>
                                 ) : (
                                     <>
-                                        <Image onClick={copyText} src={assets.copy_icon} alt='' className='w-4.5 h-auto cursor-pointer' />
+                                        <Image onClick={copyText} title='Copy' src={assets.copy_icon} alt='' className='w-4.5 h-auto cursor-pointer' />
                                         <Image src={assets.regenerate_icon} alt='' className='w-4  h-autocursor-pointer' />
                                         <Image src={assets.like_icon} alt='' className='w-4 h-auto cursor-pointer' />
                                         <Image src={assets.dislike_icon} alt='' className='w-4 h-auto cursor-pointer' />
