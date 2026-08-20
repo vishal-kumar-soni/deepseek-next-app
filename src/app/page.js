@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { assets } from "../../public/assets/assets";
+import { Zap } from 'lucide-react';
 import Sidebar from "@/components/Sidebar.js";
 import PromptBox from "@/components/PromptBox.js";
 import Message from "@/components/Message.js";
@@ -41,9 +42,9 @@ export default function Home() {
         {/* Sidebar */}
         <Sidebar expand={expand} setExpand={setExpand} />
 
-        <div className="flex flex-1 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#292a2b]">
+        <div className="flex flex-1 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#17181a]">
           <div className="w-full md:hidden absolute px-4 top-6 flex items-center justify-between ">
-            <Image alt="" onClick={() => (expand ? setExpand(false) : setExpand(true))} className="rotate-180 " src={assets.menu_icon} />
+            <Image alt="" onClick={() => (expand ? setExpand(false) : setExpand(true))} className="rotate-180 cursor-pointer " src={assets.menu_icon} />
             <Image alt="" className="opacity-70 " src={assets.chat_icon} />
           </div>
           {
@@ -56,8 +57,12 @@ export default function Home() {
                 <p className='text-sm mt-2'>How can I help you Today</p>
               </>
             ) : (
-              <div ref={containerRef} className="relative flex flex-col justify-start items-center mt-20 w-full max-h-screen  overflow-y-auto">
-                <p className="fixed top-8 border border-transparent hover:border-gray-500/50 py-1 px-2 rounded-lg font-semibold mb-6">{selectedChat.name}</p>
+              <div ref={containerRef} className="relative  flex flex-col justify-start items-center mt-20 w-full max-h-screen  overflow-y-auto">
+                <p className="fixed top-3 left-74 text-sm border border-transparent hover:border-gray-500/50 py-1 px-2 rounded-xl font-semibold mb-6">{selectedChat.name}</p>
+                <div className="fixed flex items-center justify-between gap-1.5 top-10 left-76 ">
+                  <Zap height={16} width={12} className=" mb-0 text-cyan-400"/>
+                  <p className="text-[12px] text-white/70">Instant</p>
+                </div>
                 {
                   messages.map((msg, idx)=>(
                     <Message key={idx} role={msg.role} content={msg.content} />
