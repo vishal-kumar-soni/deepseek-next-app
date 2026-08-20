@@ -74,8 +74,7 @@ function Chatlabel({ openMenu, setOpenMenu, name, id }) {
                     className={`w-4 h-auto ${openMenu.id == id && openMenu.open ? "" : "hidden"} group-hover:block`}
                 />
                 <div
-                    className={`absolute ${openMenu.id == id && openMenu.open ? "block" : "hidden"} -right-5 top-6 bg-gray-700 rounded-xl w-max p-2 `}
-                >
+                    className={`absolute ${openMenu.id == id && openMenu.open ? "block" : "hidden"} -left-20 top-6 bg-gray-700 z-50 rounded-xl w-max p-2 `}>
                     <div onClick={renameChat} className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg">
                         <Image src={assets.pencil_icon} alt="" />
                         <p>Rename</p>
