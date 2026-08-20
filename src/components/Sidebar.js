@@ -2,10 +2,11 @@
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import { assets } from '../../public/assets/assets'
-import { EllipsisVertical, Smartphone, Settings, CircleQuestionMark, LogOut } from 'lucide-react';
+import { EllipsisVertical, Smartphone, Settings, CircleQuestionMark, LogOut, Search, PanelLeft, CircleFadingPlus  } from 'lucide-react';
 import { UserButton, useClerk } from '@clerk/nextjs';
 import { useAppContext } from '@/context/AppContext.js';
 import Chatlabel from './Chatlabel.js';
+
 
 
 const footerdata = [
@@ -44,7 +45,7 @@ function Sidebar({ expand, setExpand }) {
                 menuRef.current &&
                 !menuRef.current.contains(event.target)
             ) {
-                setMenuExpand( false )
+                setMenuExpand(false)
             }
 
         }
@@ -58,39 +59,40 @@ function Sidebar({ expand, setExpand }) {
 
 
     return (
-        <div className={`flex flex-col justify-between bg-[#212327] pt-7 transition-all z-0 max-md:absolute max-md:h-screen ${expand ? 'p-4 w-72' : 'md:w-20 w-0 max-md:overflow-hidden '}`}>
+        <div className={`flex flex-col justify-between  border-r border-r-white/5 bg-[rgba(23,24,26,0.96)]  transition-all z-0 max-md:absolute max-md:h-screen ${expand ? 'px-4 pb-4 w-72' : 'md:w-52 md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden '}`}>
             <div>
-                <div className={` flex ${expand ? 'flex-row gap-8' : 'flex-col items-center gap-8'}`}>
-                    <Image src={expand ? assets.logo_text : assets.logo_icon} alt='' className={` ${expand ? 'w-56 h-auto' : " w-10 h-auto"} `} />
-                    <div onClick={() => expand ? setExpand(false) : setExpand(true)} className={` group relative flex items-center justify-center hover:bg-gray-500/20 transition-all duration-300 w-9 h-9  aspect-square rounded-lg cursor-pointer `}>
-                        <Image  src={assets.menu_icon} alt='' className="md:hidden" />
-                        <Image src={expand ? assets.sidebar_close_icon : assets.sidebar_icon} alt='' className="hidden md:block w-8 h-auto" />
+                <div className={` flex ${expand ? 'flex-row gap-8' : 'flex-row justify-between items-center gap-8 pt-5'}`}>
+                    <div className='flex gap-2 items-center justify-center'>
+                        <Image src={assets.logo_icon} height={40} width={40} className={`${!expand ? 'hidden' : 'block '} mb-1`} />
+                        <Image src={expand ? assets.logo_text : assets.logo_icon} alt='' className={` ${expand ? 'w-30 h-auto' : " w-10 h-auto ml-4"} `} />
+                    </div>
 
-                        <div className={`w-max absolute ${expand ? 'left-1/2 -translate-x-1/2 top-12' : ' -top-12 left-0'} opacity-0 group-hover:opacity-100 transition bg-black text-white text-xs px-3 py-2 rounded-lg  shadow-lg pointer-events-none `}>
-                            {expand ? 'Close' : 'Expand'}
-                            <div className={` w-3 h-3 absolute bg-black rotate-45 ${expand ? 'left-1/2 -top-1.5 -translate-x-1/2 ' : 'left-4 -bottom-1.5'}`}>
-                            </div>
+                    <div className={`  group relative flex  items-center justify-center  transition-all duration-300   aspect-square rounded-3xl cursor-pointer ${expand ? 'w-25 h-15' : 'w-30 h-10 p-2  bg-white/15 border border-white/30'} `}>
+                        <div className='p-1.5 rounded-full hover:bg-white/10'>
+                            <Search className={` ${!expand ? 'text-white' : 'text-white/60'} `} height={20} w={20} />
                         </div>
+                        <Image src={assets.menu_icon} alt='' className="md:hidden" />
+                        <div onClick={() => expand ? setExpand(false) : setExpand(true)} className='p-1.5 rounded-full hover:bg-white/10' title={` ${expand ? 'Close' : 'Expand'}`}>
+                            <PanelLeft className={`hidden md:block  h-auto ${!expand ? 'text-white' : 'text-white/60'} `} height={20} w={20} />
+                        </div>
+                        <button onClick={createNewChat} className='p-1.5 rounded-full hover:bg-white/10' title='Create new Chat' >
+                            <CircleFadingPlus className={`  h-auto ${!expand ? 'text-white' : 'hidden text-white/60'} `} height={20} w={20}/>
+                        </button>
                     </div>
                 </div>
 
-                <button onClick={createNewChat} className={`flex items-center justify-center mt-5 cursor-pointer ${expand ? 'bg-primary hover:opacity-90 rounded-2xl p-2.5 gap-2 w-max  ' : ' group relative h-9 w-9 mx-auto hover:bg-gray-500/30 rounded-lg '}`}>
-                    <Image src={expand ? assets.chat_icon : assets.chat_icon_dull} alt='' className={expand ? 'w-6 h-auto' : 'w-7 h-auto'} />
-                    <div className='absolute w-max -top-12 -right-12 opacity-0 group-hover:opacity-100 transition bg-black text-white text-sm px-3 py-2 rounded-lg shadow-lg pointer-events-none '>
-                        New Chat
-                        <div className='w-3 h-3 absolute bg-black rotate-45 left-4 -bottom-1.5'>
-                        </div>
-                    </div>
-                    {
-                        expand && <p className='text-white text font-medium'>New Chat</p>
-                    }
+                {/* New Chat Button  */}
+                <button onClick={createNewChat} className={`border border-white/5 py-2.5 w-full flex items-center justify-center gap-2 bg-[#4b4b4d] my-3 rounded-3xl text-white fonr-bold cursor-pointer ${expand?'block' : 'hidden'} `}>
+                    <CircleFadingPlus height={20} weight={20}/>
+                    <p className='font-bold text-sm'>New chat</p>
                 </button>
+
                 <div className={`mt-8 text-white/25 text-sm ${expand ? 'bloack' : "hidden"}`}>
                     <p className='my-1'>Recents</p>
 
                     {/* Chatlabel */}
                     {
-                        chats.map((chat, idx)=>
+                        chats.map((chat, idx) =>
                             <Chatlabel key={idx} name={chat.name} id={chat._id} openMenu={openMenu} setOpenMenu={setOpenMenu} />
                         )
                     }
