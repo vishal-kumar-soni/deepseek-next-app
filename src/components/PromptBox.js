@@ -119,7 +119,7 @@ function PromptBox({ isLoading, setIsLoading }) {
   }
 
   return (
-    <form onSubmit={sendPrompt} className={`w-full ${selectedChat?.messages.length> 0 ? 'max-w-3xl' : 'max-w-2xl'} bg-[#404045] p-4 mt-4 rounded-3xl transition-all`}>
+    <form onSubmit={sendPrompt} className={`w-full ${selectedChat?.messages.length> 0 ? 'max-w-3xl' : 'max-w-2xl'} bg-[#2a2a2e] p-4 mt-4 rounded-3xl transition-all border border-white/5`}>
       <textarea
         onKeyDown={handleKeyDown}
         placeholder='Message DeepSeek'

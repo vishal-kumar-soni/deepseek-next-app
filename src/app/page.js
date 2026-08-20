@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { assets } from "../../public/assets/assets";
-import { Zap } from 'lucide-react';
+import { Zap, Forward } from 'lucide-react';
 import Sidebar from "@/components/Sidebar.js";
 import PromptBox from "@/components/PromptBox.js";
 import Message from "@/components/Message.js";
 import { useAppContext } from "@/context/AppContext";
+import ShareIcon from '../../public/assets/shareIcon.jsx'
 
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
   const { selectedChat } = useAppContext()
   const containerRef = useRef()
 
-  
+
   useEffect(() => {
     if (selectedChat) {
       setMessages(selectedChat.messages)
@@ -29,11 +30,11 @@ export default function Home() {
     if (containerRef.current) {
       containerRef.current.scrollTo({
         top: containerRef.current.scrollHeight,
-        behavius:'smooth',
+        behavius: 'smooth',
       })
     }
   }, [selectedChat])
-  
+
 
   return (
     <div>
@@ -60,18 +61,21 @@ export default function Home() {
               <div ref={containerRef} className="relative  flex flex-col justify-start items-center mt-20 w-full max-h-screen  overflow-y-auto">
                 <p className="fixed top-3 left-74 text-sm border border-transparent hover:border-gray-500/50 py-1 px-2 rounded-xl font-semibold mb-6">{selectedChat.name}</p>
                 <div className="fixed flex items-center justify-between gap-1.5 top-10 left-76 ">
-                  <Zap height={16} width={12} className=" mb-0 text-cyan-400"/>
+                  <Zap height={16} width={12} className=" mb-0 text-cyan-400" />
                   <p className="text-[12px] text-white/70">Instant</p>
                 </div>
+                <div className="fixed top-3 right-8 text-white/70 p-1.5 hover:bg-white/5 rounded-full cursor-pointer" title="Share">
+                 <ShareIcon/>
+                </div>
                 {
-                  messages.map((msg, idx)=>(
+                  messages.map((msg, idx) => (
                     <Message key={idx} role={msg.role} content={msg.content} />
                   ))
                 }
                 {
                   isLoading && (
                     <div className="flex gap-4 max-w-3xl w-full py-3">
-                      <Image className="h-9 w-9 p-1 border border-white/15 rounded-full " src={assets.logo_icon} alt=""/>
+                      <Image className="h-9 w-9 p-1 border border-white/15 rounded-full " src={assets.logo_icon} alt="" />
                       <div className="loader flex justify-center items-center gap-1">
                         <div className="w-1 h-1 rounded-full bg-white animate-bounce "></div>
                         <div className="w-1 h-1 rounded-full bg-white animate-bounce "></div>
