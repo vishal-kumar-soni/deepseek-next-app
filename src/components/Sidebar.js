@@ -53,7 +53,7 @@ function Sidebar({ expand, setExpand }) {
     return (
         // Inside Sidebar.jsx
 
-        <div className={`flex flex-col justify-between border-r border-r-white/5 bg-[rgba(23,24,26,0.96)] transition-all z-0 max-md:h-screen ${expand ? 'absolute left-0 top-0 h-screen px-3 py-4 w-66 z-50' : 'md:w-52 max-md:relative md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden' 
+        <div className={`flex flex-col justify-between border-r border-r-white/5 bg-[rgba(23,24,26,0.96)] transition-all z-0 max-md:h-screen ${expand ? 'max-md:absolute left-0 top-0 h-screen px-3 py-4 w-66 z-50' : 'md:w-52 max-md:relative md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden' 
             }`}>
             <div>
                 <div className={` flex ${expand ? 'flex-row justify-between ' : 'flex-row justify-between items-center gap-8 pt-5'}`}>
