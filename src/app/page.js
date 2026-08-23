@@ -35,18 +35,27 @@ export default function Home() {
     }
   }, [selectedChat])
 
+  const handleExpand = () => {
+    if(expand){
+      console.log("DeExpand clicked")
+      setExpand(false)
+    }else{
+      console.log("Expand  clicked")
+      setExpand(true)
+    }
+  }
+
 
   return (
-    <div>
-      <div className="flex h-screen">
+    <div className="flex h-screen relative">
 
         {/* Sidebar */}
         <Sidebar expand={expand} setExpand={setExpand} />
 
-        <div className="flex flex-1 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#17181a]">
+        <div className="flex h-full  flex-1 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#17181a]">
           <div className="w-full md:hidden absolute px-4 top-6 flex items-center justify-between ">
-            <Image alt="" onClick={() => (expand ? setExpand(false) : setExpand(true))} className="rotate-180 cursor-pointer " src={assets.menu_icon} />
-            <Image alt="" className="opacity-70 " src={assets.chat_icon} />
+            <Image alt="" onClick={handleExpand} className="rotate-180 cursor-pointer " src={assets.menu_icon} />
+           
           </div>
           {
             (messages.length === 0) ? (
@@ -60,8 +69,8 @@ export default function Home() {
             ) : (
               <div ref={containerRef} className="relative  flex flex-col justify-start items-center mt-20 w-full max-h-screen  overflow-y-auto">
                 <p className="fixed top-3 left-74 text-sm border border-transparent hover:border-gray-500/50 py-1 px-2 rounded-xl font-semibold mb-6">{selectedChat.name}</p>
-                <div className="fixed flex items-center justify-between gap-1.5 top-10 left-76 ">
-                  <Zap height={16} width={12} className=" mb-0 text-cyan-400" />
+                <div className="fixed flex bg-green-300 items-center justify-between gap-1.5 top-10 left-76 ">
+                  <Zap height={16} width={12} className=" mb-0 " />
                   <p className="text-[12px] text-white/70">Instant</p>
                 </div>
                 <div className="fixed top-3 right-8 text-white/70 p-1.5 hover:bg-white/5 rounded-full cursor-pointer" title="Share">
@@ -95,6 +104,6 @@ export default function Home() {
 
         </div>
       </div>
-    </div>
+
   );
 }

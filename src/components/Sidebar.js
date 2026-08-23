@@ -1,9 +1,9 @@
 'use client'
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { assets } from '../../public/assets/assets'
 import { EllipsisVertical, Smartphone, Settings, CircleQuestionMark, LogOut, Search, PanelLeft, CircleFadingPlus } from 'lucide-react';
-import { UserButton, useClerk, SignUpButton } from '@clerk/nextjs';
+import { UserButton, useClerk } from '@clerk/nextjs';
 import { useAppContext } from '@/context/AppContext.js';
 import Chatlabel from './Chatlabel.js';
 
@@ -36,6 +36,8 @@ const footerdata = [
 
 function Sidebar({ expand, setExpand }) {
 
+    console.log("Expand is ", expand)
+
     const { user, chats, createNewChat } = useAppContext()
     const { openSignIn, signOut } = useClerk()
     const [menuExpand, setMenuExpand] = useState(false)
@@ -46,10 +48,13 @@ function Sidebar({ expand, setExpand }) {
         window.location.reload();
         alert('User signed out')
     }
-console.log("user", user)
+
 
     return (
-        <div className={`flex flex-col justify-between  border-r border-r-white/5 bg-[rgba(23,24,26,0.96)]  transition-all z-0 max-md:absolute max-md:h-screen ${expand ? 'px-3 py-4 w-66' : 'md:w-52 md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden '}`}>
+        // Inside Sidebar.jsx
+
+        <div className={`flex flex-col justify-between border-r border-r-white/5 bg-[rgba(23,24,26,0.96)] transition-all z-0 max-md:h-screen ${expand ? 'absolute left-0 top-0 h-screen px-3 py-4 w-66 z-50' : 'md:w-52 max-md:relative md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden' 
+            }`}>
             <div>
                 <div className={` flex ${expand ? 'flex-row justify-between ' : 'flex-row justify-between items-center gap-8 pt-5'}`}>
                     <div className='flex gap-1 items-center justify-center'>
@@ -61,9 +66,9 @@ console.log("user", user)
                         <div className='p-1.5 rounded-full hover:bg-white/10'>
                             <Search className={` ${!expand ? 'text-white' : 'text-white/60'} `} height={20} w={20} />
                         </div>
-                        <Image src={assets.menu_icon} alt='' className="md:hidden" />
+                        <Image src={assets.menu_icon} alt='' className={`hidden `}/>
                         <div onClick={() => expand ? setExpand(false) : setExpand(true)} className='p-1.5 rounded-full hover:bg-white/10' title={` ${expand ? 'Close' : 'Expand'}`}>
-                            <PanelLeft className={`hidden md:block  h-auto ${!expand ? 'text-white' : 'text-white/60'} `} height={20} w={20} />
+                            <PanelLeft className={`md:block  h-auto ${!expand ? 'text-white' : 'text-white/60'} `} height={20} w={20} />
                         </div>
                         <button onClick={createNewChat} className={` ${!expand ? 'text-white' : 'hidden text-white/60'} p-1.5 rounded-full hover:bg-white/10 `} title='Create new Chat' >
                             <CircleFadingPlus className={`  h-auto `} height={20} w={20} />
@@ -77,7 +82,7 @@ console.log("user", user)
                     <p className='font-bold text-sm'>New chat</p>
                 </button>
 
-                <div className={`mt-8 text-white/25 h-[65vh] overflow-y-scroll text-sm ${expand ? 'bloack' : "hidden"}`}>
+                <div className={`mt-8 text-white/25 h-[65vh] overflow-y-scroll text-sm ${expand ? 'block' : "hidden"}`}>
                     <p className='my-1'>Recents</p>
 
                     {/* Chatlabel */}
@@ -116,7 +121,7 @@ console.log("user", user)
                             <Image onClick={user ? null : openSignIn} src={assets.profile_picture} alt='' className={'h-7 w-7 rounded-full cursor-pointer'} />
                     }
                     <div className={expand ? 'w-32 overflow-hidden ' : 'w-0'}>
-                        <p className={expand ? 'text-white/90 text-sm  mt-1' : ' hidden'}>{user?user?.fullName : 'Your name'}</p>
+                        <p className={expand ? 'text-white/90 text-sm  mt-1' : ' hidden'}>{user ? user?.fullName : 'Your name'}</p>
                     </div>
                 </div>
 

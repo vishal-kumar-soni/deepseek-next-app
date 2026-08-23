@@ -93,7 +93,7 @@ function PromptBox({ isLoading, setIsLoading }) {
         for (let i = 0; i < messageTokens.length; i++) {
           setTimeout(() => {
 
-            assistantMessage.content = messageTokens.slice(0, i + 1).join(""); // issue
+            assistantMessage.content = messageTokens.slice(0, i + 1).join("");
 
             setSelectedChat((prev) => {
               const updateMessages = [
