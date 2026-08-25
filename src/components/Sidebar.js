@@ -47,7 +47,7 @@ function Sidebar({ expand, setExpand }) {
         alert('User signed out')
     }
 
-
+    
     return (
         <div className={`flex flex-col justify-between border-r border-r-white/5 bg-[rgba(23,24,26,0.96)] transition-all z-0 max-md:h-full ${expand ? 'max-md:absolute left-0 top-0 h-full  px-3 py-4 w-66 z-50' : 'md:w-52 max-md:relative md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden'
             }`}>
