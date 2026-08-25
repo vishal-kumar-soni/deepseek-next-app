@@ -25,9 +25,9 @@ function Message({ role, content }) {
     return (
         <div className='flex flex-col items-center w-full max-w-3xl text-sm bg-gree-300'>
             <div className={` flex flex-col w-full mb-8 ${role === 'user' && 'items-end'} `}>
-               <div className={` group relative max-w-2xl flex py-3 rounded-3xl overflow-hidden ${role == 'user' ? 'bg-[#2a2a2e] px-5' : 'gap-3'}`}>
+               <div className={` group relative max-w-2xl flex py-3 rounded-3xl  ${role == 'user' ? 'bg-[#2a2a2e] px-5' : 'gap-3'}`}>
                     <div className={`opacity-0 group-hover:opacity-100   absolute ${role == 'user' ? 'right-1 -bottom-7 ' : 'left-9 -bottom-6'} transition-all `}>
-                        <div className='flex bg-fuchsia-500 items-center gap-4 opacity-70 text-white/80'>
+                        <div className='flex items-center gap-4 opacity-70 text-white/80'>
                             {
                                 (role == 'user') ? (
                                     <>
