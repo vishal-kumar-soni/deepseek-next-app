@@ -22,7 +22,6 @@ function PromptBox({ isLoading, setIsLoading }) {
   const sendPrompt = async (e) => {
 
     const promptCopy = prompt;
-    console.log("The prompt copy is ",promptCopy)
 
     try {
 
@@ -30,8 +29,6 @@ function PromptBox({ isLoading, setIsLoading }) {
 
       if (!user) return alert("Login first to get response")
       if (isLoading) return alert("wait for the prevous response")
-
-      console.log("user is loggedin")
 
       setIsLoading(true);
       setPrompt('')
@@ -56,16 +53,11 @@ function PromptBox({ isLoading, setIsLoading }) {
         messages: [...prev.messages, userPrompt]
       }))
 
-      console.log('chats before api call', chats)
-      console.log(' selected chats before api call', selectedChat)
-
       // Fetch data from AI
       const { data } = await axios.post('/api/chat/ai', {
         chatId: selectedChat._id,
         prompt
       })
-
-      console.log("This is api data", data)
 
       if (data.success) {
         setChats((previousChats) => previousChats.map((chat) => (chat._id == selectedChat._id) ? {
