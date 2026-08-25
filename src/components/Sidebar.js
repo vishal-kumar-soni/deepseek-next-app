@@ -36,8 +36,6 @@ const footerdata = [
 
 function Sidebar({ expand, setExpand }) {
 
-    console.log("Expand is ", expand)
-
     const { user, chats, createNewChat } = useAppContext()
     const { openSignIn, signOut } = useClerk()
     const [menuExpand, setMenuExpand] = useState(false)

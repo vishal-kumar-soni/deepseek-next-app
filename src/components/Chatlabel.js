@@ -30,7 +30,6 @@ function Chatlabel({ expand, setExpand, openMenu, setOpenMenu, name, id }) {
             if (data.success) {
                 fetchUsersChat();
                 setOpenMenu({ id: 0, open: false });
-                console.log(data.message);
             } else {
                 console.log(data.message);
             }
@@ -54,7 +53,6 @@ function Chatlabel({ expand, setExpand, openMenu, setOpenMenu, name, id }) {
             if (data.success) {
                 fetchUsersChat();
                 setOpenMenu({ id: 0, open: false });
-                console.log(data.message);
             } else {
                 console.log(data.message);
             }
