@@ -5,6 +5,13 @@
   --color-primary: #4d6bfe
 }
 
+
+html, body {
+  background-color: #17181a;
+  height: 100%;
+  overflow: hidden; 
+}
+
 html{
   @apply scroll-smooth
 }

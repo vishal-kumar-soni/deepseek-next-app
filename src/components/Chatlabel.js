@@ -7,13 +7,14 @@ import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 
 
-function Chatlabel({ openMenu, setOpenMenu, name, id }) {
+function Chatlabel({ expand, setExpand, openMenu, setOpenMenu, name, id }) {
     const { fetchUsersChat, chats, setSelectedChat } = useAppContext();
 
     const selectChat = () => {
         const chatData = chats.find((chat) => chat._id == id);
         setSelectedChat(chatData);
-        console.log(chatData);
+
+        (expand) ? setExpand(false) : setExpand(true)
     };
 
     const renameChat = async () => {
@@ -64,17 +65,17 @@ function Chatlabel({ openMenu, setOpenMenu, name, id }) {
     };
 
     return (
-        <div onClick={selectChat} className="flex items-center justify-between px-2 py-1.5 text-white hover:bg-white/5 rounded-xl text-[12px] group cursor-pointer">
+        <div onClick={selectChat} className="flex bg- items-center justify-between px-2 py-1.5 text-white hover:bg-white/5 rounded-xl text-[12px] group cursor-pointer">
             <p className="group-hover:max-w-5/6 truncate ">{name}</p>
             <div onClick={(e) => { e.stopPropagation(); setOpenMenu({ id: id, open: !openMenu.open }) }} className="group relative flex items-center justify-center h-9 w-9 aspect-square hover:bg-black/15 rounded-full ">
 
                 <Image
                     src={assets.three_dots}
                     alt=""
-                    className={`w-4 h-auto ${openMenu.id == id && openMenu.open ? "" : "hidden"} group-hover:block`}
+                    className={`w-4 h-auto  ${openMenu.id == id && openMenu.open ? "" : "hidden"} group-hover:block max-md:block`}
                 />
                 <div
-                    className={`absolute ${openMenu.id == id && openMenu.open ? "block" : "hidden"} -left-20 top-6 bg-gray-700 z-50 rounded-xl w-max p-2 `}>
+                    className={`absolute bg-amber-500 ${openMenu.id == id && openMenu.open ? "block" : "hidden"} -left-20 top-6 bg-gray-700 z-50 rounded-xl w-max p-2 `}>
                     <div onClick={renameChat} className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg">
                         <Image src={assets.pencil_icon} alt="" />
                         <p>Rename</p>

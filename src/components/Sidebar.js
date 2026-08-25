@@ -51,9 +51,7 @@ function Sidebar({ expand, setExpand }) {
 
 
     return (
-        // Inside Sidebar.jsx
-
-        <div className={`flex flex-col justify-between border-r border-r-white/5 bg-[rgba(23,24,26,0.96)] transition-all z-0 max-md:h-screen ${expand ? 'max-md:absolute left-0 top-0 h-screen px-3 py-4 w-66 z-50' : 'md:w-52 max-md:relative md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden' 
+        <div className={`flex flex-col justify-between border-r border-r-white/5 bg-[rgba(23,24,26,0.96)] transition-all z-0 max-md:h-full ${expand ? 'max-md:absolute left-0 top-0 h-full  px-3 py-4 w-66 z-50' : 'md:w-52 max-md:relative md:bg-[#17181a] md:border-none w-0 max-md:overflow-hidden'
             }`}>
             <div>
                 <div className={` flex ${expand ? 'flex-row justify-between ' : 'flex-row justify-between items-center gap-8 pt-5'}`}>
@@ -66,7 +64,7 @@ function Sidebar({ expand, setExpand }) {
                         <div className='p-1.5 rounded-full hover:bg-white/10'>
                             <Search className={` ${!expand ? 'text-white' : 'text-white/60'} `} height={20} w={20} />
                         </div>
-                        <Image src={assets.menu_icon} alt='' className={`hidden `}/>
+                        <Image src={assets.menu_icon} alt='' className={`hidden `} />
                         <div onClick={() => expand ? setExpand(false) : setExpand(true)} className='p-1.5 rounded-full hover:bg-white/10' title={` ${expand ? 'Close' : 'Expand'}`}>
                             <PanelLeft className={`md:block  h-auto ${!expand ? 'text-white' : 'text-white/60'} `} height={20} w={20} />
                         </div>
@@ -88,7 +86,7 @@ function Sidebar({ expand, setExpand }) {
                     {/* Chatlabel */}
                     {
                         chats.map((chat, idx) =>
-                            <Chatlabel key={idx} name={chat.name} id={chat._id} openMenu={openMenu} setOpenMenu={setOpenMenu} />
+                            <Chatlabel key={idx} name={chat.name} id={chat._id} expand={expand} setExpand={setExpand} openMenu={openMenu} setOpenMenu={setOpenMenu} />
                         )
                     }
                 </div>

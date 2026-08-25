@@ -30,32 +30,25 @@ export default function Home() {
     if (containerRef.current) {
       containerRef.current.scrollTo({
         top: containerRef.current.scrollHeight,
-        behavius: 'smooth',
+        behavior: 'smooth',
       })
     }
   }, [selectedChat])
 
   const handleExpand = () => {
-    if (expand) {
-      console.log("DeExpand clicked")
-      setExpand(false)
-    } else {
-      console.log("Expand  clicked")
-      setExpand(true)
-    }
+    expand ? setExpand(false) : setExpand(true)
   }
 
-
+  {/*  */ }
   return (
-    <div className="flex h-screen relative">
+    <div className="flex h-dvh  relative">
 
       {/* Sidebar */}
       <Sidebar expand={expand} setExpand={setExpand} />
 
-      <div className="flex h-full  flex-1 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#17181a]">
+      <div className="flex h-full flex-1 min-w-0 flex-col items-center justify-center px-4 pb-8 text-white relative bg-[#17181a]">
         <div className="w-full h-4  md:hidden absolute px-4 top-6 flex items-center justify-between ">
           <Image alt="" onClick={handleExpand} height={20} width={20} className="rotate-180 cursor-pointer " src={assets.menu_icon} />
-
         </div>
         {
           (messages.length === 0) ? (
@@ -67,8 +60,8 @@ export default function Home() {
               <p className='text-sm mt-2'>How can I help you Today</p>
             </>
           ) : (
-            <div ref={containerRef} className="relative  flex flex-col justify-start items-center mt-20 w-full max-h-screen  overflow-y-auto">
-              <div className={` fixed top-5 max-md:top-3 ${expand ? 'left-74 max-md:hidden':'left-56 max-md:left-16'} `}>
+            <div ref={containerRef} className="relative flex flex-col justify-start items-center mt-20 w-full max-h-screen overflow-y-auto overflow-x-hidden">
+              <div className={`bg-[#17181a] fixed top-5 max-md:top-3 ${expand ? 'left-74 max-md:hidden' : 'left-56 max-md:left-16'} `}>
                 <p className=" text-sm border border-transparent hover:border-gray-500/50 rounded-3xl font-semibold px-2 py-1 cursor-pointer ">{selectedChat.name}</p>
                 <div className=" flex  items-center justify-start gap-1.5  ">
                   <Zap height={16} width={12} className=" mb-0 text-cyan-500 " />
