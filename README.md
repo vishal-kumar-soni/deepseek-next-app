@@ -1,36 +1,223 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DeepSeek AI Chat
+
+A modern AI chat application built with **Next.js**, **React**, **MongoDB**, **Clerk**, and the **DeepSeek API**.
+
+## Features
+
+* 🤖 AI-powered conversations with DeepSeek
+* 🔐 Authentication with Clerk
+* 💬 Create and manage multiple chats
+* 🗂️ Recent chat history
+* ✏️ Rename conversations
+* 🆕 Create new chats
+* 👤 User profile
+* 🚪 User sign out
+* 📱 Responsive design
+* 🌙 Dark-themed UI
+* 💾 Persistent chat history with MongoDB
+* ⚡ Next.js App Router
+
+## Tech Stack
+
+### Frontend
+
+* Next.js
+* React
+* JavaScript
+* Tailwind CSS
+* Lucide React
+
+### Backend
+
+* Next.js API Routes
+* MongoDB
+* Mongoose
+
+### Authentication
+
+* Clerk Authentication
+
+### AI
+
+* DeepSeek API
+* OpenAI-compatible API
+
+## Project Structure
+
+```bash
+deepseek/
+├── public/
+│   └── assets/
+│
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── chat/
+│   │   │   │   ├── ai/
+│   │   │   │   ├── create/
+│   │   │   │   ├── delete/
+│   │   │   │   ├── get/
+│   │   │   │   └── rename/
+│   │   │   └── clerk/
+│   │   │       └── route.js
+│   │   │
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   ├── page.js
+│   │   └── prism.css
+│   │
+│   ├── components/
+│   │   ├── Chatlabel.js
+│   │   ├── Message.js
+│   │   ├── PromptBox.js
+│   │   └── Sidebar.js
+│   │
+│   ├── config/
+│   │   └── db.config.js
+│   │
+│   ├── context/
+│   │   └── AppContext.js
+│   │
+│   └── models/
+│       ├── Chat.model.js
+│       └── User.model.js
+│
+├── .env.local
+├── .gitignore
+├── next.config.js
+├── package.json
+└── README.md
+```
+
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
 
-```bash
+Clone the repository and move into the project directory.
+
+### 2. Install dependencies
+
+Run:
+
+npm install
+
+### 3. Configure environment variables
+
+Create a `.env.local` file in the root directory and add:
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+MONGODB_URI=your_mongodb_connection_string
+
+DEEPSEEK_API_KEY=your_deepseek_api_key
+
+Never commit your `.env.local` file or expose secret API keys.
+
+## Running the Application
+
+Start the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open the application in your browser at:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Authentication
 
-## Learn More
+This project uses **Clerk** to handle user authentication and account management.
 
-To learn more about Next.js, take a look at the following resources:
+Clerk provides authentication components and utilities for Next.js applications.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[Clerk Documentation](https://clerk.com/docs?utm_source=chatgpt.com)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## DeepSeek API
 
-## Deploy on Vercel
+The application uses the DeepSeek API to generate AI responses.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+DeepSeek provides an OpenAI-compatible API interface, allowing the application to communicate with DeepSeek using the OpenAI SDK.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[DeepSeek API Documentation](https://api-docs.deepseek.com/?utm_source=chatgpt.com)
+
+## Database
+
+MongoDB is used to store user chat data and conversation history.
+
+Mongoose is used to define schemas and interact with MongoDB from the application.
+
+[MongoDB Documentation](https://www.mongodb.com/docs/?utm_source=chatgpt.com)
+
+[Mongoose Documentation](https://mongoosejs.com/docs/?utm_source=chatgpt.com)
+
+## Chat Flow
+
+User enters a prompt.
+
+↓
+
+Prompt is sent to the Next.js API.
+
+↓
+
+The authenticated user is verified.
+
+↓
+
+The prompt is sent to the DeepSeek API.
+
+↓
+
+DeepSeek generates an AI response.
+
+↓
+
+The conversation is stored in MongoDB.
+
+↓
+
+The response is displayed in the chat interface.
+
+## Future Improvements
+
+* Streaming AI responses
+* Message regeneration
+* Edit and resend messages
+* File uploads
+* Image understanding
+* Voice input
+* Multiple AI models
+* Conversation export
+* Improved mobile experience
+* Rate limiting
+* Production deployment
+* Pricing
+
+## Documentation
+
+[Next.js Documentation](https://nextjs.org/docs?utm_source=chatgpt.com)
+
+[Clerk Documentation](https://clerk.com/docs?utm_source=chatgpt.com)
+
+[DeepSeek API Documentation](https://api-docs.deepseek.com/?utm_source=chatgpt.com)
+
+[MongoDB Documentation](https://www.mongodb.com/docs/?utm_source=chatgpt.com)
+
+[Mongoose Documentation](https://mongoosejs.com/docs/?utm_source=chatgpt.com)
+
+## 👨‍💻 Author
+
+
+👨‍💻 Vishal Kumar Soni
+
+- GitHub: :https://github.com/vishal-kumar-soni
+- LinkedIn:https://www.linkedin.com/in/vishal-kumar-soni-/
+- Email: vkumarsoni30@gmail.com
+
+
+
+---
+
+# ⭐ If you like this project, give it a star on GitHub!
