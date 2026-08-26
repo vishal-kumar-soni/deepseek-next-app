@@ -13,8 +13,11 @@ function Chatlabel({ expand, setExpand, openMenu, setOpenMenu, name, id }) {
     const selectChat = () => {
         const chatData = chats.find((chat) => chat._id == id);
         setSelectedChat(chatData);
+        
+        if (window.innerWidth < 740) {
+            (expand) ? setExpand(false) : setExpand(true)
+        }
 
-        (expand) ? setExpand(false) : setExpand(true)
     };
 
     const renameChat = async () => {
