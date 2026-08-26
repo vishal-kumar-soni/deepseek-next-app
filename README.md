@@ -24,7 +24,14 @@ A modern AI chat application built with **Next.js**, **React**, **MongoDB**, **C
 
 ### Dashboard UI
 
-<img src="./Frontend/src/assets/dashboard.png" width="100%" />
+<img src="./public/assets/deepseek-dashboard.png" width="100%" />
+
+### Mobile view
+<img src="./public/assets/mobile-view.png" width="100%" />
+
+
+### Clerk Authentication
+<img src="./public/assets/clerk-authentication.png" width="100%" />
 
 ---
 
