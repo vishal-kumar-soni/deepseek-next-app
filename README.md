@@ -17,6 +17,17 @@ A modern AI chat application built with **Next.js**, **React**, **MongoDB**, **C
 * 💾 Persistent chat history with MongoDB
 * ⚡ Next.js App Router
 
+
+---
+
+## 🖼️ Project Preview
+
+### Dashboard UI
+
+<img src="./Frontend/src/assets/dashboard.png" width="100%" />
+
+---
+
 ## Tech Stack
 
 ### Frontend
